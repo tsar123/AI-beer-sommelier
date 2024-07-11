@@ -27,7 +27,7 @@ salty = st.slider('Выберите солености', 0, 66, 10)
 fruits = st.slider('Выберите фруктовость', 0, 222, 10)
 hoppy = st.slider('Выберите хмельность', 0, 193, 10)
 spices = st.slider('Выберите пряность', 0, 184, 10)
-malty = st.slider('Выберите солодость', 0, 304, 10)
+malty = st.slider('Выберите солодовость', 0, 304, 10)
 
 df2 = pd.read_csv('https://raw.githubusercontent.com/Riddars/BeerProjectForEng/main/beer_data_set.csv', encoding='ISO-8859-1')
 df = pd.DataFrame(df2)
@@ -41,13 +41,13 @@ y = df['Style Key']
 # Разделение на обучающий и тестовый наборы
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=0)
 
-# best_params = {
-#      'bootstrap': True, 'max_depth': 40, 'max_features': 'sqrt', 'min_samples_leaf': 1, 'min_samples_split': 2, 'n_estimators': 300
-# }
+best_params = {
+     'bootstrap': True, 'max_depth': 40, 'max_features': 'sqrt', 'min_samples_leaf': 1, 'min_samples_split': 2, 'n_estimators': 300
+}
 
 #rf = RandomForestClassifier()
-# best_rf_model = RandomForestClassifier(n_estimators=100, param_distributions=best_params, random_state=42)
-best_rf_model = RandomForestClassifier(n_estimators=100, random_state=42)
+best_rf_model = RandomForestClassifier(n_estimators=100, param_distributions=best_params, random_state=42)
+# best_rf_model = RandomForestClassifier(n_estimators=100, random_state=42)
 best_rf_model.fit(X_train, y_train)
 #random_search = RandomizedSearchCV(estimator=rf, param_distributions=best_params, n_iter=100, cv=3, verbose=2, random_state=42, n_jobs=-1)
 
