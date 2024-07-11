@@ -46,7 +46,7 @@ best_params = {
 }
 
 #rf = RandomForestClassifier()
-best_rf_model = RandomForestClassifier(n_estimators=100, **best_params, random_state=42)
+best_rf_model = RandomForestClassifier(n_estimators=300, max_depth=40, random_state=42, max_features='sqrt', min_samples_leaf=1, min_samples_split=2)
 # best_rf_model = RandomForestClassifier(n_estimators=100, random_state=42)
 best_rf_model.fit(X_train, y_train)
 #random_search = RandomizedSearchCV(estimator=rf, param_distributions=best_params, n_iter=100, cv=3, verbose=2, random_state=42, n_jobs=-1)
