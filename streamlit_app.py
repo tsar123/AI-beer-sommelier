@@ -69,31 +69,31 @@ styles_and_keys = df2.groupby('Style').agg({'Style Key': 'unique'}).reset_index(
 styles_and_keys.columns = ['Style Name', 'Style Key']
 
 
-input_data = {}
-for feature in X.columns:
-    min_value = X[feature].min()
-    max_value = X[feature].max()
-    input_data[feature] = st.slider(f'{feature} ({min_value} - {max_value})', min_value, max_value, min_value)
+# input_data = {}
+# for feature in X.columns:
+#     min_value = X[feature].min()
+#     max_value = X[feature].max()
+#     input_data[feature] = st.slider(f'{feature} ({min_value} - {max_value})', min_value, max_value, min_value)
 
-print(input_data)
-st.write(input_data)
+# print(input_data)
+# st.write(input_data)
 
 input_data = {
-    X[1]: abv,
-    'min_ibu': min_ibu,
-    'max_ibu': max_ibu,
-    'astringency': astringency,
-    'body': body,
-    'alcohol': alcohol,
-    'bitter': bitter,
-    'sweet': sweet,
-    'sour': sour,
-    'salty': salty,
-    'fruits': fruits,
-    'hoppy': hoppy,
-    'spices': spices,
-    'malty': malty
-    }
+  "ABV": abv,
+  "Min IBU": min_ibu,
+  "Max IBU": max_ibu,
+  "Astringency": astringency,
+  "Body": body,
+  "Alcohol": alcohol,
+  "Bitter": bitter,
+  "Sweet": sweet,
+  "Sour": sour,
+  "Salty": salty,
+  "Fruits": fruits,
+  "Hoppy": hoppy,
+  "Spices": spices,
+  "Malty": malty
+}
 
 print(input_data)
 st.write(input_data)
