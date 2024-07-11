@@ -7,7 +7,7 @@ st.write(
 
 st.title('Beer AI assistant')
 
-abv = st.slider('Выберите ', 0, 57.5, 10)
+abv = st.slider('Выберите ', 0, 57, 10)
 min_ibu = st.slider('Выберите ', 0, 65, 10)
 max_ibu = st.slider('Выберите ', 0, 100, 10)
 astringency = st.slider('Выберите ', 0, 83, 10)
