@@ -85,14 +85,15 @@ best_params = {
      'bootstrap': True, 'max_depth': 40, 'max_features': 'sqrt', 'min_samples_leaf': 1, 'min_samples_split': 2, 'n_estimators': 300
 }
 
-
-rf = RandomForestClassifier()
-random_search = RandomizedSearchCV(estimator=rf, param_distributions=best_params, n_iter=100, cv=3, verbose=2, random_state=42, n_jobs=-1)
+#rf = RandomForestClassifier()
+best_rf_model = RandomForestClassifier(n_estimators=100, param_distributions=best_params, random_state=42)
+best_rf_model.fit(X_train, y_train)
+#random_search = RandomizedSearchCV(estimator=rf, param_distributions=best_params, n_iter=100, cv=3, verbose=2, random_state=42, n_jobs=-1)
 
 # Поиск лучших параметров
-random_search.fit(X_train, y_train)
+# random_search.fit(X_train, y_train)
 
-best_rf_model = random_search.best_estimator_
+# best_rf_model = random_search.best_estimator_
 
 
 styles_and_keys = df2.groupby('Style').agg({'Style Key': 'unique'}).reset_index()
@@ -102,7 +103,7 @@ styles_and_keys.columns = ['Style Name', 'Style Key']
 # X_scaled = scaler.fit_transform(X)
 # Обучение модели RandomForest на всем датасете
 # best_rf_model.fit(X_scaled, y)
-best_rf_model.fit(X, y)
+# best_rf_model.fit(X, y)
 
 # Создание словаря для быстрого доступа к рецептам по Style Key
 style_recipes = {style: df2[df2['Style Key'] == style].index.tolist() for style in df2['Style Key'].unique()}
