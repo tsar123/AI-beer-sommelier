@@ -1,11 +1,10 @@
 import streamlit as st
 
-st.title("🎈 My new app")
-st.write(
-    "Let's start building! For help and inspiration, head over to [docs.streamlit.io](https://docs.streamlit.io/)."
-)
 
 st.title('Beer AI assistant')
+st.write(
+    "Время приключений! Хватай с собой друзей"
+)
 
 abv = st.slider('Выберите градус алкоголя', 0, 57, 10)
 min_ibu = st.slider('Выберите мин. горкость', 0, 65, 10)
