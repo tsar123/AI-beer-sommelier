@@ -68,22 +68,29 @@ style_recipes = {style: df2[df2['Style Key'] == style].index.tolist() for style 
 styles_and_keys = df2.groupby('Style').agg({'Style Key': 'unique'}).reset_index()
 styles_and_keys.columns = ['Style Name', 'Style Key']
 
-input_data = {
-    'abv': [abv],
-    'min_ibu': [min_ibu],
-    'max_ibu': [max_ibu],
-    'astringency': [astringency],
-    'body': [body],
-    'alcohol': [alcohol],
-    'bitter': [bitter],
-    'sweet': [sweet],
-    'sour': [sour],
-    'salty': [salty],
-    'fruits': [fruits],
-    'hoppy': [hoppy],
-    'spices': [spices],
-    'malty': [malty]
-    }
+# input_data = {
+#     'abv': [abv],
+#     'min_ibu': [min_ibu],
+#     'max_ibu': [max_ibu],
+#     'astringency': [astringency],
+#     'body': [body],
+#     'alcohol': [alcohol],
+#     'bitter': [bitter],
+#     'sweet': [sweet],
+#     'sour': [sour],
+#     'salty': [salty],
+#     'fruits': [fruits],
+#     'hoppy': [hoppy],
+#     'spices': [spices],
+#     'malty': [malty]
+#     }
+
+input_data = {}
+for feature in X.columns:
+    min_value = X[feature].min()
+    max_value = X[feature].max()
+    input_data[feature] = st.slider(f'{feature} ({min_value} - {max_value})', min_value, max_value, min_value)
+
 
 if st.button('Подобрать пиво'):
     input_data_df = pd.DataFrame([input_data])
