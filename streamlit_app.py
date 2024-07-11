@@ -69,15 +69,6 @@ styles_and_keys = df2.groupby('Style').agg({'Style Key': 'unique'}).reset_index(
 styles_and_keys.columns = ['Style Name', 'Style Key']
 
 
-# input_data = {}
-# for feature in X.columns:
-#     min_value = X[feature].min()
-#     max_value = X[feature].max()
-#     input_data[feature] = st.slider(f'{feature} ({min_value} - {max_value})', min_value, max_value, min_value)
-
-# print(input_data)
-# st.write(input_data)
-
 input_data = {
   "ABV": abv,
   "Min IBU": min_ibu,
@@ -95,11 +86,8 @@ input_data = {
   "Malty": malty
 }
 
-print(input_data)
-st.write(input_data)
 
 if st.button('Подобрать пиво'):
-
     input_data_df = pd.DataFrame([input_data])
 
     input_data_scaled = scaler.transform(input_data_df.values)
@@ -125,8 +113,11 @@ if st.button('Подобрать пиво'):
 
     # # Формируем сообщение о ближайшем рецепте и его характеристиках
     output_recept = 'Ближайший реальный рецепт имеет следующие характеристики:\n'
+    st.write(output_recept)
+    output_recept_har = ''
     for feature in X.columns:
-        output_recept += f'{feature}: {closest_recipe[feature]}\n'
+        output_recept_har += f'{feature}: {closest_recipe[feature]}\n'
+        st.write(output_recept_har)
 
 
     # Выводим сообщение с характеристиками ближайшего рецепта
