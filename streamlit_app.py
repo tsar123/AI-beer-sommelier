@@ -69,7 +69,7 @@ styles_and_keys = df2.groupby('Style').agg({'Style Key': 'unique'}).reset_index(
 styles_and_keys.columns = ['Style Name', 'Style Key']
 
 if st.button('Подобрать пиво'):
-    input_data = pd.DataFrame({
+    input_data = pd.DataFrame([
     'abv': [abv],
     'min_ibu': [min_ibu],
     'max_ibu': [max_ibu],
@@ -84,7 +84,7 @@ if st.button('Подобрать пиво'):
     'hoppy': [hoppy],
     'spices': [spices],
     'malty': [malty]
-    })
+    ])
     
 
 
