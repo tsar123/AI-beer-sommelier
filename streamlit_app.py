@@ -7,12 +7,11 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
+
 st.title('Beer AI assistant')
 st.write(
     "Время приключений! Хватай с собой друзей"
 )
-
-
 
 abv = st.slider('Выберите градус алкоголя', 0, 57, 10)
 min_ibu = st.slider('Выберите мин. горкость', 0, 65, 10)
@@ -45,22 +44,12 @@ best_params = {
      'bootstrap': True, 'max_depth': 40, 'max_features': 'sqrt', 'min_samples_leaf': 1, 'min_samples_split': 2, 'n_estimators': 300
 }
 
-#rf = RandomForestClassifier()
-best_rf_model = RandomForestClassifier(n_estimators=300, max_depth=40, random_state=42, max_features='sqrt', min_samples_leaf=1, min_samples_split=2)
+best_rf_model = RandomForestClassifier(n_estimators=300, max_depth=30, random_state=42, max_features='auto', min_samples_leaf=1, min_samples_split=2)
 # best_rf_model = RandomForestClassifier(n_estimators=100, random_state=42)
 best_rf_model.fit(X_train, y_train)
-#random_search = RandomizedSearchCV(estimator=rf, param_distributions=best_params, n_iter=100, cv=3, verbose=2, random_state=42, n_jobs=-1)
-
-# Поиск лучших параметров
-# random_search.fit(X_train, y_train)
-
-# best_rf_model = random_search.best_estimator_
 
 scaler = StandardScaler()
 X_scaled = scaler.fit_transform(X)
-# Обучение модели RandomForest на всем датасете
-# best_rf_model.fit(X_scaled, y)
-# best_rf_model.fit(X, y)
 
 # Создание словаря для быстрого доступа к рецептам по Style Key
 style_recipes = {style: df2[df2['Style Key'] == style].index.tolist() for style in df2['Style Key'].unique()}
@@ -120,9 +109,3 @@ if st.button('Подобрать пиво'):
     for feature in X.columns:
         output_recept_har = f'{feature}: {closest_recipe[feature]}\n'
         st.write(output_recept_har)
-
-
-    # Выводим сообщение с характеристиками ближайшего рецепта
-    # st.write(output)
-    # st.write(output_label)
-    # st.write(output_recept)
