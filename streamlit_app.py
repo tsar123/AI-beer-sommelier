@@ -69,14 +69,14 @@ styles_and_keys = df2.groupby('Style').agg({'Style Key': 'unique'}).reset_index(
 styles_and_keys.columns = ['Style Name', 'Style Key']
 
 
-# input_data = {}
-# for feature in X.columns:
-#     min_value = X[feature].min()
-#     max_value = X[feature].max()
-#     input_data[feature] = st.slider(f'{feature} ({min_value} - {max_value})', min_value, max_value, min_value)
+input_data = {}
+for feature in X.columns:
+    min_value = X[feature].min()
+    max_value = X[feature].max()
+    input_data[feature] = st.slider(f'{feature} ({min_value} - {max_value})', min_value, max_value, min_value)
 
-# print(input_data)
-# st.write(input_data)
+print(input_data)
+st.write(input_data)
 
 input_data = {
     'abv': abv,
