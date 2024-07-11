@@ -70,18 +70,15 @@ styles_and_keys.columns = ['Style Name', 'Style Key']
 
 
 input_data = {}
-# for feature in X.columns:
-#     min_value = X[feature].min()
-#     max_value = X[feature].max()
-#     input_data[feature] = st.slider(f'{feature} ({min_value} - {max_value})', min_value, max_value, min_value)
+for feature in X.columns:
+    min_value = X[feature].min()
+    max_value = X[feature].max()
+    input_data[feature] = st.slider(f'{feature} ({min_value} - {max_value})', min_value, max_value, min_value)
 
+print(input_data)
+st.write(input_data)
 
 if st.button('Подобрать пиво'):
-
-    for feature in X.columns:
-        min_value = X[feature].min()
-        max_value = X[feature].max()
-        input_data[feature] = st.slider(f'{feature} ({min_value} - {max_value})', min_value, max_value, min_value)
 
     input_data_df = pd.DataFrame([input_data])
 
