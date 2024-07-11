@@ -88,7 +88,7 @@ if st.button('Подобрать пиво'):
     
 
 
-    # input_data_scaled = scaler.transform(input_data)
+    input_data_scaled = scaler.transform(input_data)
     predicted_style = best_rf_model.predict(input_data)[0] #Предсказываем стиль пива на основе введенных характеристик
     style_name = styles_and_keys.loc[styles_and_keys['Style Key'] == predicted_style, 'Style Name'].values[0]
 
