@@ -68,31 +68,21 @@ style_recipes = {style: df2[df2['Style Key'] == style].index.tolist() for style 
 styles_and_keys = df2.groupby('Style').agg({'Style Key': 'unique'}).reset_index()
 styles_and_keys.columns = ['Style Name', 'Style Key']
 
-# input_data = {
-#     'abv': [abv],
-#     'min_ibu': [min_ibu],
-#     'max_ibu': [max_ibu],
-#     'astringency': [astringency],
-#     'body': [body],
-#     'alcohol': [alcohol],
-#     'bitter': [bitter],
-#     'sweet': [sweet],
-#     'sour': [sour],
-#     'salty': [salty],
-#     'fruits': [fruits],
-#     'hoppy': [hoppy],
-#     'spices': [spices],
-#     'malty': [malty]
-#     }
 
 input_data = {}
-for feature in X.columns:
-    min_value = X[feature].min()
-    max_value = X[feature].max()
-    input_data[feature] = st.slider(f'{feature} ({min_value} - {max_value})', min_value, max_value, min_value)
+# for feature in X.columns:
+#     min_value = X[feature].min()
+#     max_value = X[feature].max()
+#     input_data[feature] = st.slider(f'{feature} ({min_value} - {max_value})', min_value, max_value, min_value)
 
 
 if st.button('Подобрать пиво'):
+
+    for feature in X.columns:
+        min_value = X[feature].min()
+        max_value = X[feature].max()
+        input_data[feature] = st.slider(f'{feature} ({min_value} - {max_value})', min_value, max_value, min_value)
+
     input_data_df = pd.DataFrame([input_data])
 
     input_data_scaled = scaler.transform(input_data_df.values)
@@ -117,11 +107,12 @@ if st.button('Подобрать пиво'):
     output_label = f'\nПохожий на ваше описание рецепт: {closest_recipe_name}'
 
     # # Формируем сообщение о ближайшем рецепте и его характеристиках
-    # output = 'Ближайший реальный рецепт имеет следующие характеристики:\n'
-    # for feature in X.columns:
-    #     output += f'{feature}: {closest_recipe[feature]}\n'
+    output_recept = 'Ближайший реальный рецепт имеет следующие характеристики:\n'
+    for feature in X.columns:
+        output_recept += f'{feature}: {closest_recipe[feature]}\n'
 
 
     # Выводим сообщение с характеристиками ближайшего рецепта
     st.write(output)
     st.write(output_label)
+    st.write(output_recept)
