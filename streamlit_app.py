@@ -79,7 +79,7 @@ print(input_data)
 st.write(input_data)
 
 input_data = {
-    'abv': abv,
+    X[1]: abv,
     'min_ibu': min_ibu,
     'max_ibu': max_ibu,
     'astringency': astringency,
