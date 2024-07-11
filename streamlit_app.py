@@ -110,17 +110,19 @@ if st.button('Подобрать пиво'):
     output = f'Предсказанный стиль пива: {style_name}'
     closest_recipe_name = df2.loc[closest_recipe_index, 'Name']
     output_label = f'\nПохожий на ваше описание рецепт: {closest_recipe_name}'
-
+    
+    st.write(output)
+    st.write(output_label)
     # # Формируем сообщение о ближайшем рецепте и его характеристиках
     output_recept = 'Ближайший реальный рецепт имеет следующие характеристики:\n'
     st.write(output_recept)
     output_recept_har = ''
     for feature in X.columns:
-        output_recept_har += f'{feature}: {closest_recipe[feature]}\n'
+        output_recept_har = f'{feature}: {closest_recipe[feature]}\n'
         st.write(output_recept_har)
 
 
     # Выводим сообщение с характеристиками ближайшего рецепта
-    st.write(output)
-    st.write(output_label)
-    st.write(output_recept)
+    # st.write(output)
+    # st.write(output_label)
+    # st.write(output_recept)
