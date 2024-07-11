@@ -103,17 +103,11 @@ if st.button('Подобрать пиво'):
     style_indices = style_recipes[predicted_style]
     # Создаем выборку рецептов предсказанного стиля
     X_style = X.iloc[style_indices]
-    """
-    Тут мы создаем "подвыборку" из нашей базы данных,
-    включающую только рецепты предсказанного стиля пива.
-    Это как если бы мы открыли книгу рецептов на разделе с конкретным стилем пива.
-    """
-
     # Применяем метод ближайших соседей к выборке рецептов предсказанного стиля
     neighbors_style = NearestNeighbors(n_neighbors=1)
     neighbors_style.fit(X_style)
 
-    distance, index = neighbors_style.kneighbors(input_data)
+    distance, index = neighbors_style.kneighbors(input_data_df)
     closest_recipe_index = style_indices[index[0][0]]
     closest_recipe = X.iloc[closest_recipe_index]
     """
