@@ -79,20 +79,20 @@ styles_and_keys.columns = ['Style Name', 'Style Key']
 # st.write(input_data)
 
 input_data = {
-    'abv': [abv],
-    'min_ibu': [min_ibu],
-    'max_ibu': [max_ibu],
-    'astringency': [astringency],
-    'body': [body],
-    'alcohol': [alcohol],
-    'bitter': [bitter],
-    'sweet': [sweet],
-    'sour': [sour],
-    'salty': [salty],
-    'fruits': [fruits],
-    'hoppy': [hoppy],
-    'spices': [spices],
-    'malty': [malty]
+    'abv': abv,
+    'min_ibu': min_ibu,
+    'max_ibu': max_ibu,
+    'astringency': astringency,
+    'body': body,
+    'alcohol': alcohol,
+    'bitter': bitter,
+    'sweet': sweet,
+    'sour': sour,
+    'salty': salty,
+    'fruits': fruits,
+    'hoppy': hoppy,
+    'spices': spices,
+    'malty': malty
     }
 
 print(input_data)
