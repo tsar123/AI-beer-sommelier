@@ -98,10 +98,11 @@ best_rf_model = random_search.best_estimator_
 styles_and_keys = df2.groupby('Style').agg({'Style Key': 'unique'}).reset_index()
 styles_and_keys.columns = ['Style Name', 'Style Key']
 
-scaler = StandardScaler()
-X_scaled = scaler.fit_transform(X)
+# scaler = StandardScaler()
+# X_scaled = scaler.fit_transform(X)
 # Обучение модели RandomForest на всем датасете
-best_rf_model.fit(X_scaled, y)
+# best_rf_model.fit(X_scaled, y)
+best_rf_model.fit(X, y)
 
 # Создание словаря для быстрого доступа к рецептам по Style Key
 style_recipes = {style: df2[df2['Style Key'] == style].index.tolist() for style in df2['Style Key'].unique()}
