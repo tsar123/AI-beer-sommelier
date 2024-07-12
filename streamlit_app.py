@@ -88,16 +88,17 @@ if st.button('Подобрать пиво'):
     style_name = styles_and_keys.loc[styles_and_keys['Style Key'] == predicted_style, 'Style Name'].values[0]
 
 
-    style_indices = style_recipes[predicted_style]
+    # style_indices = style_recipes[predicted_style]
     # Создаем выборку рецептов предсказанного стиля
-    X_style = X.iloc[style_indices]
+    # X_style = X.iloc[style_indices]
     # Применяем метод ближайших соседей к выборке рецептов предсказанного стиля
     # neighbors_style = NearestNeighbors(n_neighbors=1)
     # neighbors_style.fit(X_style)
 
     distance, index = neighbors_style.kneighbors(input_data_df)
-    closest_recipe_index = style_indices[index[0][0]]
-    closest_recipe = X.iloc[closest_recipe_index]
+    # closest_recipe_index = style_indices[index[0][0]]
+    # closest_recipe = X.iloc[closest_recipe_index]
+    closest_recipe = X.iloc[index[0][0]]
 
     # Формируем сообщение о ближайшем рецепте и предсказании
     output = f'Предсказанный стиль пива: {style_name}'
