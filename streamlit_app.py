@@ -8,6 +8,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 
+# Первый заголовок сайта
 st.title('Beer AI assistant')
 st.write(
     "Время приключений! Хватай с собой друзей"
@@ -50,23 +51,25 @@ best_params = {
      'bootstrap': True, 'max_depth': 40, 'max_features': 'sqrt', 'min_samples_leaf': 1, 'min_samples_split': 2, 'n_estimators': 300
 }
 
+# Обучение модели RandomForest на датасете
 # best_rf_model = RandomForestClassifier(n_estimators=300, max_depth=30, random_state=42, max_features='auto', min_samples_leaf=1, min_samples_split=2)
 best_rf_model = RandomForestClassifier(n_estimators=100, random_state=42)
 best_rf_model.fit(X_train, y_train)
 
+# Масштабирование признаков
 scaler = StandardScaler()
 X_scaled = scaler.fit_transform(X)
 
+# Применяем метод ближайших соседей к выборке рецептов предсказанного стиля
 neighbors_style = NearestNeighbors(n_neighbors=1)
 neighbors_style.fit(X)
 
 # Создание словаря для быстрого доступа к рецептам по Style Key
 style_recipes = {style: df2[df2['Style Key'] == style].index.tolist() for style in df2['Style Key'].unique()}
-
 styles_and_keys = df2.groupby('Style').agg({'Style Key': 'unique'}).reset_index()
 styles_and_keys.columns = ['Style Name', 'Style Key']
 
-
+# Сохранение выбранных характеристик пива
 input_data = {
   "ABV": abv,
   "Min IBU": min_ibu,
@@ -85,6 +88,7 @@ input_data = {
 }
 
 
+# Кнопка подбора пива
 if st.button('Подобрать пиво'):
     input_data_df = pd.DataFrame([input_data])
     input_data_scaled = scaler.transform(input_data_df.values)
@@ -100,9 +104,9 @@ if st.button('Подобрать пиво'):
     output = f'Предсказанный стиль пива: {style_name}'
     closest_recipe_name = df2.loc[index[0][0], 'Name']
     output_label = f'\nПохожий на ваше описание рецепт: {closest_recipe_name}'
-    
     st.write(output)
     st.write(output_label)
+
     # Формируем сообщение о ближайшем рецепте и его характеристиках
     output_recept = 'Ближайший реальный рецепт имеет следующие характеристики:\n'
     st.write(output_recept)
