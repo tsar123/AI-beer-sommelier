@@ -51,6 +51,9 @@ best_rf_model.fit(X_train, y_train)
 scaler = StandardScaler()
 X_scaled = scaler.fit_transform(X)
 
+neighbors_style = NearestNeighbors(n_neighbors=1)
+neighbors_style.fit(X)
+
 # Создание словаря для быстрого доступа к рецептам по Style Key
 style_recipes = {style: df2[df2['Style Key'] == style].index.tolist() for style in df2['Style Key'].unique()}
 
@@ -79,8 +82,9 @@ input_data = {
 if st.button('Подобрать пиво'):
     input_data_df = pd.DataFrame([input_data])
 
-    input_data_scaled = scaler.transform(input_data_df.values)
-    predicted_style = best_rf_model.predict(input_data_scaled)[0] #Предсказываем стиль пива на основе введенных характеристик
+    # input_data_scaled = scaler.transform(input_data_df.values)
+    predicted_style = best_rf_model.predict(input_data)[0]
+    # predicted_style = best_rf_model.predict(input_data_scaled)[0] #Предсказываем стиль пива на основе введенных характеристик
     style_name = styles_and_keys.loc[styles_and_keys['Style Key'] == predicted_style, 'Style Name'].values[0]
 
 
@@ -88,8 +92,8 @@ if st.button('Подобрать пиво'):
     # Создаем выборку рецептов предсказанного стиля
     X_style = X.iloc[style_indices]
     # Применяем метод ближайших соседей к выборке рецептов предсказанного стиля
-    neighbors_style = NearestNeighbors(n_neighbors=1)
-    neighbors_style.fit(X_style)
+    # neighbors_style = NearestNeighbors(n_neighbors=1)
+    # neighbors_style.fit(X_style)
 
     distance, index = neighbors_style.kneighbors(input_data_df)
     closest_recipe_index = style_indices[index[0][0]]
