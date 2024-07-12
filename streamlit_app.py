@@ -123,11 +123,11 @@ if st.button('Подобрать пиво'):
         st.write(output_recept_har)
 
 
-    # Функция для генерации графика сравнения характеристик
+    # Создание графика сравнения характеристик
     fig, axs = plt.subplots(2, 1, figsize=(10, 8))
 
     # График для пользовательского ввода
-    axs[0].bar(X.columns, input_data_scaled.values, color='blue', label='Пользовательский выбор')
+    axs[0].bar(X.columns, input_data_scaled.values.flatten(), color='blue', label='Пользовательский выбор')
     axs[0].set_title('Выбранные характеристики')
     axs[0].set_ylabel('Значения')
     axs[0].legend()
@@ -138,5 +138,5 @@ if st.button('Подобрать пиво'):
     axs[1].set_ylabel('Значения')
     axs[1].legend()
 
-    plt.tight_layout()
-    plt.show()
+    # Отображение графика
+    st.pyplot(fig)
