@@ -13,6 +13,7 @@ st.write(
     "Время приключений! Хватай с собой друзей"
 )
 
+# Создание ползунков выбора характеристик
 abv = st.slider('Выберите градус алкоголя', 0, 57, 0)
 min_ibu = st.slider('Выберите мин. горкость', 0, 65, 0)
 max_ibu = st.slider('Выберите макс. горкость', 0, 100, 0)
@@ -28,8 +29,12 @@ hoppy = st.slider('Выберите хмельность', 0, 193, 0)
 spices = st.slider('Выберите пряность', 0, 184, 0)
 malty = st.slider('Выберите солодовость', 0, 304, 0)
 
-df2 = pd.read_csv('https://raw.githubusercontent.com/Riddars/BeerProjectForEng/main/beer_data_set.csv', encoding='ISO-8859-1')
+# Импорт датасета
+df2 = pd.read_csv('beer_data_set.csv', encoding='ISO-8859-1')
 df = pd.DataFrame(df2)
+
+# Удаление строк с пустыми значениями
+df = df.dropna()
 
 # Удаление ненужных столбцов
 df = df.drop(['Name', 'key', 'Brewery', 'Description', 'Style', 'Ave Rating'], axis=1)
@@ -37,6 +42,7 @@ df = df.drop(['Name', 'key', 'Brewery', 'Description', 'Style', 'Ave Rating'], a
 # Разделение данных на признаки и целевую переменную
 X = df.drop('Style Key', axis=1)
 y = df['Style Key']
+
 # Разделение на обучающий и тестовый наборы
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=0)
 
