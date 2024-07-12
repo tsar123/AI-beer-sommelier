@@ -103,7 +103,7 @@ if st.button('Подобрать пиво'):
     # Формируем сообщение о ближайшем рецепте и предсказании
     output = f'Предсказанный стиль пива: {style_name}'
     # closest_recipe_name = df2.loc[closest_recipe_index, 'Name']
-    closest_recipe_name = df2.loc[index, 'Name']
+    closest_recipe_name = df2.loc[index[0][0], 'Name']
     output_label = f'\nПохожий на ваше описание рецепт: {closest_recipe_name}'
     
     st.write(output)
