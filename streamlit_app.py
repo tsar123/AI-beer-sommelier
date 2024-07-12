@@ -121,3 +121,22 @@ if st.button('Подобрать пиво'):
     for feature in X.columns:
         output_recept_har = f'{feature}: {closest_recipe[feature]}\n'
         st.write(output_recept_har)
+
+
+    # Функция для генерации графика сравнения характеристик
+    fig, axs = plt.subplots(2, 1, figsize=(10, 8))
+
+    # График для пользовательского ввода
+    axs[0].bar(X.columns, input_data.values.flatten(), color='blue', label='Пользовательский выбор')
+    axs[0].set_title('Выбранные характеристики')
+    axs[0].set_ylabel('Значения')
+    axs[0].legend()
+
+    # График для предсказанного рецепта
+    axs[1].bar(X.columns, closest_recipe.values, color='red', label='Предсказанный рецепт')
+    axs[1].set_title('Предсказанные характеристики')
+    axs[1].set_ylabel('Значения')
+    axs[1].legend()
+
+    plt.tight_layout()
+    plt.show()
