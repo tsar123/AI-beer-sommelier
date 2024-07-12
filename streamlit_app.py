@@ -87,34 +87,23 @@ input_data = {
 
 if st.button('Подобрать пиво'):
     input_data_df = pd.DataFrame([input_data])
-
     input_data_scaled = scaler.transform(input_data_df.values)
+
+    # Предсказываем стиль пива на основе введенных характеристик
     predicted_style = best_rf_model.predict(input_data_scaled)[0]
-    # predicted_style = best_rf_model.predict(input_data_scaled)[0] #Предсказываем стиль пива на основе введенных характеристик
     style_name = styles_and_keys.loc[styles_and_keys['Style Key'] == predicted_style, 'Style Name'].values[0]
 
-
-    # style_indices = style_recipes[predicted_style]
-    # Создаем выборку рецептов предсказанного стиля
-    # X_style = X.iloc[style_indices]
-    # Применяем метод ближайших соседей к выборке рецептов предсказанного стиля
-    # neighbors_style = NearestNeighbors(n_neighbors=1)
-    # neighbors_style.fit(X_style)
-
     distance, index = neighbors_style.kneighbors(input_data_df)
-    # closest_recipe_index = style_indices[index[0][0]]
-    # closest_recipe = X.iloc[closest_recipe_index]
     closest_recipe = X.iloc[index[0][0]]
 
     # Формируем сообщение о ближайшем рецепте и предсказании
     output = f'Предсказанный стиль пива: {style_name}'
-    # closest_recipe_name = df2.loc[closest_recipe_index, 'Name']
     closest_recipe_name = df2.loc[index[0][0], 'Name']
     output_label = f'\nПохожий на ваше описание рецепт: {closest_recipe_name}'
     
     st.write(output)
     st.write(output_label)
-    # # Формируем сообщение о ближайшем рецепте и его характеристиках
+    # Формируем сообщение о ближайшем рецепте и его характеристиках
     output_recept = 'Ближайший реальный рецепт имеет следующие характеристики:\n'
     st.write(output_recept)
     output_recept_har = ''
