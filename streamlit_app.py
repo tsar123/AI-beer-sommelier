@@ -82,8 +82,8 @@ input_data = {
 if st.button('Подобрать пиво'):
     input_data_df = pd.DataFrame([input_data])
 
-    # input_data_scaled = scaler.transform(input_data_df.values)
-    predicted_style = best_rf_model.predict(input_data)[0]
+    input_data_scaled = scaler.transform(input_data_df.values)
+    predicted_style = best_rf_model.predict(input_data_scaled)[0]
     # predicted_style = best_rf_model.predict(input_data_scaled)[0] #Предсказываем стиль пива на основе введенных характеристик
     style_name = styles_and_keys.loc[styles_and_keys['Style Key'] == predicted_style, 'Style Name'].values[0]
 
